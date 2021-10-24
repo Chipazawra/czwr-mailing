@@ -30,7 +30,8 @@ services:
     image: stefanprodan/caddy
     container_name: caddy
     ports:
-      - "8886:8886"
+      - "8884:8884"
+      - "8885:8885"
     volumes:
       - ./caddy:/etc/caddy
     environment:

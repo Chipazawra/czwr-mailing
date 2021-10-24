@@ -1,4 +1,4 @@
- 8886/auth*   {
+:8885 {
     basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
     proxy / auth:8885 {
             transparent
@@ -8,7 +8,7 @@
     tls off
 }
 
-8886/profile* {
+:8884 {
     basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
     proxy / profile:8884 {
             transparent
