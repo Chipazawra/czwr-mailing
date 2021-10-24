@@ -1,0 +1,19 @@
+ 8886/auth*   {
+    basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
+    proxy / auth:8885 {
+            transparent
+        }
+
+    errors stderr
+    tls off
+}
+
+8886/profile* {
+    basicauth / {$ADMIN_USER} {$ADMIN_PASSWORD}
+    proxy / profile:8884 {
+            transparent
+        }
+
+    errors stderr
+    tls off
+}

@@ -1,0 +1,41 @@
+version: "3.9"
+
+networks:
+  mailing-net:
+    driver: bridge
+
+services:
+  auth:
+    container_name: auth
+    image: chipazawra/czwr-mailing-auth:latest
+    environment:
+      SIGNING_KEY: ${SIGNING_KEY:-DEFAULTSECRET}
+    networks:
+      - mailing-net  
+    expose:
+      - 8885
+  
+  profile:
+    container_name: profile
+    image: chipazawra/czwr-mailing-profile:latest
+    environment:
+      SIGNING_KEY: ${SIGNING_KEY:-DEFAULTSECRET}
+    networks:
+      - mailing-net  
+    expose:
+      - 8884
+
+  caddy:
+    container_name: caddy
+    image: stefanprodan/caddy
+    container_name: caddy
+    ports:
+      - "8886:8886"
+    volumes:
+      - ./caddy:/etc/caddy
+    environment:
+      - ADMIN_USER=admin
+      - ADMIN_PASSWORD=admin
+    restart: unless-stopped
+    networks:
+      - mailing-net    
